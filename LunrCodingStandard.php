@@ -41,6 +41,7 @@ class PHP_CodeSniffer_Standards_Lunr_LunrCodingStandard extends PHP_CodeSniffer_
     public function getIncludedSniffs()
     {
         return array(
+                '/PEAR/Sniffs/Functions/FunctionCallSignatureSniff.php',
                 '/PEAR/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php',
 
                 'Lunr/Sniffs'
