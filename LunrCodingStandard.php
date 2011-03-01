@@ -27,20 +27,22 @@ class PHP_CodeSniffer_Standards_Lunr_LunrCodingStandard extends PHP_CodeSniffer_
     public function getExcludedSniffs()
     {
         return array(
-            'Squiz/Sniffs/WhiteSpace/ScopeIndentSniff.php',
+/*            'Squiz/Sniffs/WhiteSpace/ScopeIndentSniff.php',
             'Squiz/Sniffs/WhiteSpace/ControlStructureSpacingSniff.php',
             'Squiz/Sniffs/WhiteSpace/ScopeClosingBraceSniff.php',
             'Squiz/Sniffs/WhiteSpace/LanguageConstructSpacingSniff.php',
             'Squiz/Sniffs/WhiteSpace/FunctionSpacingSniff.php',
             'Squiz/Sniffs/WhiteSpace/FunctionClosingBraceSpaceSniff.php',
             'Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
-            'Squiz/Sniffs/WhiteSpace/MemberVarSpacingSniff.php'
+            'Squiz/Sniffs/WhiteSpace/MemberVarSpacingSniff.php'*/
         );
     }
 
     public function getIncludedSniffs()
     {
         return array(
+                'Generic/Sniffs/Files/LineLengthSniff.php',
+
                 '/PEAR/Sniffs/Functions/FunctionCallSignatureSniff.php',
                 '/PEAR/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php',
 
