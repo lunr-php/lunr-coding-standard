@@ -42,9 +42,11 @@ class PHP_CodeSniffer_Standards_Lunr_LunrCodingStandard extends PHP_CodeSniffer_
     {
         return array(
                 'Generic/Sniffs/Files/LineLengthSniff.php',
+                '/Generic/Sniffs/WhiteSpace/ScopeIndentSniff.php',
 
-                '/PEAR/Sniffs/Functions/FunctionCallSignatureSniff.php',
-                '/PEAR/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php',
+                'PEAR/Sniffs/Functions/FunctionCallSignatureSniff.php',
+                'PEAR/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php',
+                'PEAR/Sniffs/Commenting/FunctionCommentSniff.php',
 
                 'Lunr/Sniffs'
                 );
