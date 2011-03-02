@@ -47,6 +47,7 @@ class PHP_CodeSniffer_Standards_Lunr_LunrCodingStandard extends PHP_CodeSniffer_
                 'PEAR/Sniffs/Functions/FunctionCallSignatureSniff.php',
                 'PEAR/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php',
                 'PEAR/Sniffs/Commenting/FunctionCommentSniff.php',
+                'PEAR/Sniffs/Commenting/FileCommentSniff.php',
 
                 'Lunr/Sniffs'
                 );
