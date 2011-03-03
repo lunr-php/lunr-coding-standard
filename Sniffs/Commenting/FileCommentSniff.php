@@ -92,7 +92,7 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff implements PHP_Cod
                                         'order_text'     => 'follows @author',
                                        ),
                        'license'    => array(
-                                        'required'       => true,
+                                        'required'       => false,
                                         'allow_multiple' => false,
                                         'order_text'     => 'follows @copyright (if used) or @author',
                                        ),
