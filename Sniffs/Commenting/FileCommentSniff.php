@@ -682,7 +682,7 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff implements PHP_Cod
             $content  = $copyright->getContent();
             if ($content !== '') {
                 $matches = array();
-                if (preg_match('/^([0-9]{4})((.{1})([0-9]{4}))? (.+)$/', $content, $matches) !== 0) {
+                if (preg_match('/^([0-9]{4})((.{1})([0-9]{4}))?(,)? (.+)$/', $content, $matches) !== 0) {
                     // Check earliest-latest year order.
                     if ($matches[3] !== '') {
                         if ($matches[3] !== '-') {
@@ -696,6 +696,7 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff implements PHP_Cod
                         }
                     }
                 } else {
+                    echo "Content: $content\n";
                     $error = '@copyright tag must contain a year and the name of the copyright holder';
                     $this->currentFile->addError($error, $errorPos);
                 }
