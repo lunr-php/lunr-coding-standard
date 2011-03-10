@@ -83,6 +83,12 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
      */
     protected $currentFile = null;
 
+    /**
+     * The current stack pointer
+     *
+     * @var Integer
+     */
+    protected $stackPtr = null;
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -120,6 +126,8 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
         if ($commentEnd === false) {
             return;
         }
+
+        $this->stackPtr = $stackPtr;
 
         $this->currentFile = $phpcsFile;
         $tokens            = $phpcsFile->getTokens();
@@ -191,7 +199,7 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
             return;
         }
 
-        $this->processParams($commentStart);
+        $this->processParams($commentStart, $stackPtr);
         $this->processReturn($commentStart, $commentEnd);
         $this->processThrows($commentStart);
 
@@ -300,6 +308,29 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
 
     }//end processReturn()
 
+    /**
+     * Find an @version tag between the commentstart and the first parameter
+     *
+     * @param int $commentStart The position in the stack where
+     *                          the comment started.
+     * @param int $paramStart   The position in the stack where
+     *                          the first parameter of the given
+     *                          comment started.
+     *
+     * @return bool|int $return The token position if found, FALSE otherwise
+     */
+    private function findVersion($commentStart, $paramStart)
+    {
+        $tokens = $this->currentFile->getTokens();
+        for ($i = $paramStart; $i > $commentStart; --$i)
+        {
+            if (preg_match("/[ ]*[\*] @version (\d.)*\d$/", $tokens[$i]['content']))
+            {
+                return $i;
+            }
+        }
+        return FALSE;
+    }
 
     /**
      * Process the function parameter comments.
@@ -326,11 +357,29 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
             }
 
             // Parameters must appear immediately after the comment.
-            if ($params[0]->getOrder() !== 2) {
-                $error    = 'Parameters must appear immediately after the comment';
+            if (($params[0]->getOrder() !== 2) && ($params[0]->getOrder() !== 3)) {
+                $error    = 'Parameters must appear immediately after the comment or a valid @version definition';
                 $errorPos = ($params[0]->getLine() + $commentStart);
                 $this->currentFile->addError($error, $errorPos);
+            } elseif ($params[0]->getOrder() == 3) {
+                $version = $this->findVersion($commentStart, $params[0]->getLine() + $commentStart);
+                $tokens = $this->currentFile->getTokens();
+                if ($version === FALSE)
+                {
+                    $error    = 'Parameters must appear immediately after the comment or a valid @version definition';
+                    $errorPos = ($params[0]->getLine() + $commentStart);
+                    $this->currentFile->addError($error, $errorPos);
+                }
+                else
+                {
+                    if (!preg_match("/[ ]*[\*]$/", $tokens[$version + 1]['content'])) {
+                        $error    = '@version tag requires a blank newline after it';
+                        $errorPos = ($version + 1);
+                        $this->currentFile->addError($error, $errorPos);
+                    }
+                }
             }
+
 
             $previousParam      = null;
             $spaceBeforeVar     = 10000;
