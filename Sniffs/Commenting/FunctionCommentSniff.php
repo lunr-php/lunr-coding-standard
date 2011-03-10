@@ -454,8 +454,6 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
 
                         $this->currentFile->addError($error, $errorPos);
                     }
-                } elseif (substr($paramName, 0, 6) == '$_POST') {
-                    // Don't barf on POST parameters
                 } else {
                     // We must have an extra parameter comment.
                     $error = 'Superfluous doc comment for parameter ' . $paramName . ' at position '.$pos;
