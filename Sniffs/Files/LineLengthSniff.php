@@ -118,11 +118,11 @@ class Lunr_Coding_Standard_Sniffs_Files_LineLengthSniff implements PHP_CodeSniff
         if (preg_match('|@version[^\$]+\$Id|', $lineContent) === 0 && preg_match('|@license|', $lineContent) === 0) {
             $lineLength = strlen($lineContent);
             if ($this->absoluteLineLimit > 0 && $lineLength > $this->absoluteLineLimit) {
-                $error = 'Line exceeds maximum limit of '.$this->absoluteLineLimit." characters; contains $lineLength characters";
-                $phpcsFile->addError($error, $stackPtr, 'MaxLengthExceeded');
+/*                $error = 'Line exceeds maximum limit of '.$this->absoluteLineLimit." characters; contains $lineLength characters";
+                $phpcsFile->addError($error, $stackPtr, 'MaxLengthExceeded');*/
             } else if ($lineLength > $this->lineLimit) {
-                $warning = 'Line exceeds '.$this->lineLimit." characters; contains $lineLength characters";
-                $phpcsFile->addWarning($warning, $stackPtr, 'LineTooLong');
+/*                $warning = 'Line exceeds '.$this->lineLimit." characters; contains $lineLength characters";
+                $phpcsFile->addWarning($warning, $stackPtr, 'LineTooLong');*/
             }
         }
 
