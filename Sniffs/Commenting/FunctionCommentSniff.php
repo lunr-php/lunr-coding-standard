@@ -243,6 +243,37 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
             }
         }
 
+        // Short description must be single line and end with a full stop.
+        $testShort = trim($short);
+        $lastChar  = $testShort[(strlen($testShort) - 1)];
+        if (substr_count($testShort, $phpcsFile->eolChar) !== 0) {
+            $error = 'Function comment short description must be on a single line';
+            $phpcsFile->addError($error, ($commentStart + 1), 'ShortSingleLine');
+        }
+
+        if (preg_match('|[A-Z]|', $testShort[0]) === 0) {
+            $error = 'Function comment short description must start with a capital letter';
+            $phpcsFile->addError($error, ($commentStart + 1), 'ShortNotCapital');
+        }
+
+        if ($lastChar !== '.') {
+            $error = 'Function comment short description must end with a full stop';
+            $phpcsFile->addError($error, ($commentStart + 1), 'ShortFullStop');
+        }
+
+        // The last content should be a newline and the content before
+        // that should not be blank. If there is more blank space
+        // then they have additional blank lines at the end of the comment.
+        $words   = $this->commentParser->getWords();
+        $lastPos = (count($words) - 1);
+        if (trim($words[($lastPos - 1)]) !== ''
+            || strpos($words[($lastPos - 1)], $this->currentFile->eolChar) === false
+            || trim($words[($lastPos - 2)]) === ''
+        ) {
+            $error = 'Additional blank lines found at end of function comment';
+            $this->currentFile->addError($error, $commentEnd, 'SpacingAfter');
+        }
+
     }//end process()
 
 
