@@ -157,8 +157,8 @@ class Lunr_Coding_Standard_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP
             }//end while
         }//end if
 
-        if ($foundLines !== 2) {
-            $error = 'Expected 2 blank lines before function; %s found';
+        if ($foundLines !== 1) {
+            $error = 'Expected 1 blank lines before function; %s found';
             $data  = array($foundLines);
             $phpcsFile->addError($error, $stackPtr, 'Before', $data);
         }
