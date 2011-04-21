@@ -256,7 +256,7 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
             $phpcsFile->addError($error, ($commentStart + 1), 'ShortNotCapital');
         }
 
-        if ($lastChar !== '.') {
+        if ($lastChar !== '.' && $lastChar !== '!') {
             $error = 'Function comment short description must end with a full stop';
             $phpcsFile->addError($error, ($commentStart + 1), 'ShortFullStop');
         }
