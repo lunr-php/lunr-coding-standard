@@ -84,7 +84,7 @@ class Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff implements PHP_C
         }
 
         // The use of variables in double quoted strings is not allowed.
-//         if ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING) {
+        if ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING) {
 //             $stringTokens = token_get_all('<?php '.$workingString);
 //             foreach ($stringTokens as $token) {
 //                 if (is_array($token) === true && $token[0] === T_VARIABLE) {
@@ -94,8 +94,8 @@ class Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff implements PHP_C
 //                 }
 //             }
 //
-//             return;
-//         }//end if
+            return;
+        }//end if
 
         // Work through the following tokens, in case this string is stretched
         // over multiple Lines.
