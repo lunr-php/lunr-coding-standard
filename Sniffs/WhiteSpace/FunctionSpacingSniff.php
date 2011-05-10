@@ -89,6 +89,9 @@ class Lunr_Coding_Standard_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP
             if ($nextContent === false) {
                 // We are at the end of the file.
                 $foundLines = 0;
+            } elseif($tokens[$nextLineToken]['code'] === T_CLOSE_CURLY_BRACKET) {
+                // End of class or namespace
+                $foundLines = 0;
             } else {
                 $foundLines = ($tokens[$nextContent]['line'] - $tokens[$nextLineToken]['line']);
             }
