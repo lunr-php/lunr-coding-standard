@@ -126,7 +126,7 @@ class Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff implements PHP_C
 
         $error = 'String %s does not require double quotes; use single quotes instead';
         $data  = array($workingString);
-        $phpcsFile->addError($error, $stackPtr, 'NotRequired', $data);
+        $phpcsFile->addWarning($error, $stackPtr, 'NotRequired', $data);
 
     }//end process()
 
