@@ -3,4 +3,13 @@
   <description>Lunr Framework Coding Standard</description>
 
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+  <rule ref="Generic.WhiteSpace.ScopeIndent"/>
+
+ <!-- Lines can be 85 chars long, but never show errors -->
+ <rule ref="Generic.Files.LineLength">
+  <properties>
+   <property name="lineLimit" value="120"/>
+   <property name="absoluteLineLimit" value="130"/>
+  </properties>
+ </rule>
 </ruleset>
