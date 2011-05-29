@@ -3,6 +3,7 @@
   <description>Lunr Framework Coding Standard</description>
 
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+  <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
   <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
