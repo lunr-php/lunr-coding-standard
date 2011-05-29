@@ -2,6 +2,8 @@
 <ruleset name="Lunr">
   <description>Lunr Framework Coding Standard</description>
 
+  <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
 
