@@ -6,6 +6,7 @@
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
   <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
   <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+  <rule ref="Generic.PHP.NoSilencedErrors"/>
   <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
