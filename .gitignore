@@ -1,2 +1,5 @@
 # Files to be ignored by git
 *.kdev4
+
+# Ignore built documentation
+build/*
