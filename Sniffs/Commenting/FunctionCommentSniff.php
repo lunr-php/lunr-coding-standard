@@ -317,17 +317,22 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
     {
         // Skip constructor and destructor.
         $className = '';
+        $normalized_name = '';
         if ($this->_classToken !== null) {
             $className = $this->currentFile->getDeclarationName($this->_classToken);
+            $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/','$1 $2',$className));
             $className = strtolower(ltrim($className, '_'));
         }
 
+        $split_name = explode(' ', $normalized_name);
+        $index = sizeof($split_name)-1;
+
         $methodName      = strtolower(ltrim($this->_methodName, '_'));
         $special = array('__construct', '__destruct', 'setUp', 'tearDown');
-//         $isSpecialMethod = ($this->_methodName === '__construct' || $this->_methodName === '__destruct');
         $isSpecialMethod = (in_array($this->_methodName, $special));
+        $isTestMethod = (is_array($split_name) && ($split_name[$index] === 'Test') && (preg_match('/^test/', $this->_methodName) != 0));
 
-        if ($isSpecialMethod === false && $methodName !== $className) {
+        if ($isSpecialMethod === false && $isTestMethod === false && $methodName !== $className) {
             // Report missing return tag.
             if ($this->commentParser->getReturn() === null) {
                 $error = 'Missing @return tag in function comment';
