@@ -323,7 +323,9 @@ class Lunr_Coding_Standard_Sniffs_Commenting_FunctionCommentSniff implements PHP
         }
 
         $methodName      = strtolower(ltrim($this->_methodName, '_'));
-        $isSpecialMethod = ($this->_methodName === '__construct' || $this->_methodName === '__destruct');
+        $special = array('__construct', '__destruct', 'setUp', 'tearDown');
+//         $isSpecialMethod = ($this->_methodName === '__construct' || $this->_methodName === '__destruct');
+        $isSpecialMethod = (in_array($this->_methodName, $special));
 
         if ($isSpecialMethod === false && $methodName !== $className) {
             // Report missing return tag.
