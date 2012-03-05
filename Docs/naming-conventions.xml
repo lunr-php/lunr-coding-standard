@@ -1,0 +1,38 @@
+<section xml:id="naming_conventions" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xl="http://www.w3.org/1999/xlink">
+<title>Naming Conventions</title>
+    <section xml:id="classes">
+        <title>Classes</title>
+        <para>Class names in Lunr should not contain references to the directories in which they are stored. This role is already taken by the namespace. It should be rather a short concise name to describe the content of the class.</para>
+        <para>Class names may only contain alphanumeric characters. Underscores are not permitted. If a class name is comprised of more than one word, the first
+        letter of each Word must be capitalized. Successive capitalized letters are permitted but discouraged.</para>
+    </section>
+    <section xml:id="interfaces">
+        <title>Interfaces</title>
+        <para>In general interfaces follow the same conventions as classes, with one additional rule: interface names must end in the term "Interface".</para>
+    </section>
+    <section xml:id="functions">
+        <title>Functions and Methods</title>
+        <para>Function names may only contain alphanumeric characters and must always start with a lowercase letter. When a function name consists of more than one word, the words need to be separated by an underscore. "camelCaps" is not permitted for function names.</para>
+        <para>As an example <function>get_info()</function> is a valid function name, whereas <function>getInfo()</function> is not.</para>
+    </section>
+    <section xml:id="variables">
+        <title>Variables and Fields/Attributes</title>
+        <para>Variables follow the same conventions as functions. private or protected fields/attributes must not start with an underscore.</para>
+        <para>Verbosity is generally encouraged. Variables should always be as verbose as practical to describe the data that the developer intends to store in them. Terse variable names such as "$i" and "$n" are discouraged for all but the smallest loop contexts. If a loop contains more than 20 lines of code, the index variables should have more descriptive names.</para>
+    </section>
+    <section xml:id="constants">
+        <title>Constants</title>
+        <para>Constants may contain both alphanumeric characters and underscores. Numbers are permitted in constant names.</para>
+        <para>All letters used in a constant name must be capitalized, while all words in a constant name must be separated by underscore characters.
+            For example, EMBED_SUPPRESS_EMBED_EXCEPTION is permitted but EMBED_SUPPRESSEMBEDEXCEPTION is not.</para>
+        <para>Constants must be defined as class members with the "const" modifier. Defining constants in the global scope with the "define" function is permitted but strongly discouraged.</para>
+    </section>
+    <section xml:id="filenames">
+        <title>Filenames</title>
+        <para>Filenames in Lunr need to follow a very strict naming scheme, so as to not break class autoloading. Filenames may contain alphanumeric characters as well the "." (dot). Underscores and dashes are not permitted.</para>
+        <para>The basic file naming scheme within Lunr is category.componentname.inc.php.</para>
+        <para>"componentname" is either the class name or the interface name, or if it is a resource file the class or interface name it belongs to.</para>
+        <para>"category" is dependent on the content of the file. For classes this is "class" and for interfaces "interface". MVC classes are an exception. For those "category" is "controller", "model" or "view" respectively. HTML files with or without inline php code have a category of "html".</para>
+        <para>As an additional rule, MVC-classes as well as Interfaces must not contain their category value within their componentname. As an example <function>controller.user.inc.php</function> is a valid filename for the class UserController, whereas <function>class.usercontroller.inc.php</function> is not.</para>
+    </section>
+</section>
