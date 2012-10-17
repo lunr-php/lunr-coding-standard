@@ -1,6 +1,6 @@
 <?php
 /**
- * Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff.
+ * Lunr_Sniffs_Strings_DoubleQuoteUsageSniff.
  *
  * PHP version 5
  *
@@ -15,7 +15,7 @@
  */
 
 /**
- * Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff.
+ * Lunr_Sniffs_Strings_DoubleQuoteUsageSniff.
  *
  * Makes sure that any use of Double Quotes ("") are warranted.
  *
@@ -28,7 +28,7 @@
  * @version   Release: 1.3.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Coding_Standard_Sniffs_Strings_DoubleQuoteUsageSniff implements PHP_CodeSniffer_Sniff
+class Lunr_Sniffs_Strings_DoubleQuoteUsageSniff implements PHP_CodeSniffer_Sniff
 {
 
 

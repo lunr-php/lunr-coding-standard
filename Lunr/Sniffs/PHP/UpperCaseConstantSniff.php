@@ -28,7 +28,7 @@
  * @version   Release: 1.3.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Coding_Standard_Sniffs_PHP_UpperCaseConstantSniff implements PHP_CodeSniffer_Sniff
+class Lunr_Sniffs_PHP_UpperCaseConstantSniff implements PHP_CodeSniffer_Sniff
 {
 
     /**

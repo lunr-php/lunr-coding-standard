@@ -1,6 +1,6 @@
 <?php
 /**
- * Lunr_Coding_Standard_Sniffs_Formatting_FunctionSpacingSniff.
+ * Lunr_Sniffs_Formatting_FunctionSpacingSniff.
  *
  * PHP version 5
  *
@@ -15,7 +15,7 @@
  */
 
 /**
- * Lunr_Coding_Standard_Sniffs_WhiteSpace_FunctionSpacingSniff.
+ * Lunr_Sniffs_WhiteSpace_FunctionSpacingSniff.
  *
  * Checks the separation between methods in a class or interface.
  *
@@ -28,7 +28,7 @@
  * @version   Release: 1.3.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Coding_Standard_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
+class Lunr_Sniffs_WhiteSpace_FunctionSpacingSniff implements PHP_CodeSniffer_Sniff
 {
 
 

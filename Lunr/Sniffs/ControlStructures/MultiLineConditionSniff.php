@@ -1,6 +1,6 @@
 <?php
 /**
- * Lunr_Coding_Standard_Sniffs_ControlStructures_MultiLineConditionSniff.
+ * Lunr_Sniffs_ControlStructures_MultiLineConditionSniff.
  *
  * PHP version 5
  *
@@ -14,7 +14,7 @@
  */
 
 /**
- * Lunr_Coding_Standard_Sniffs_ControlStructures_MultiLineConditionSniff.
+ * Lunr_Sniffs_ControlStructures_MultiLineConditionSniff.
  *
  * Ensure multi-line IF conditions are defined correctly.
  *
@@ -26,7 +26,7 @@
  * @version   Release: 1.3.0
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Coding_Standard_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_CodeSniffer_Sniff
+class Lunr_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_CodeSniffer_Sniff
 {
 
 

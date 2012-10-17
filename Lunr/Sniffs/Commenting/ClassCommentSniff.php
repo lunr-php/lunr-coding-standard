@@ -21,8 +21,8 @@ if (class_exists('PHP_CodeSniffer_CommentParser_ClassCommentParser', true) === f
 
 require_once dirname(__FILE__) . "/FileCommentSniff.php";
 
-if (class_exists('Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff', true) === false) {
-    $error = 'Class Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff not found';
+if (class_exists('Lunr_Sniffs_Commenting_FileCommentSniff', true) === false) {
+    $error = 'Class Lunr_Sniffs_Commenting_FileCommentSniff not found';
     throw new PHP_CodeSniffer_Exception($error);
 }
 
@@ -49,7 +49,7 @@ if (class_exists('Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff', true
  * @version   Release: 1.2.2
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Coding_Standard_Sniffs_Commenting_ClassCommentSniff extends Lunr_Coding_Standard_Sniffs_Commenting_FileCommentSniff
+class Lunr_Sniffs_Commenting_ClassCommentSniff extends Lunr_Sniffs_Commenting_FileCommentSniff
 {
 
 
