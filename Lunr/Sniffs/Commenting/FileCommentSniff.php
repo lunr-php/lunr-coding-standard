@@ -87,12 +87,12 @@ class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                                         'order_text'     => 'follows @subpackage (if used) or @package',
                                        ),
                        'copyright'  => array(
-                                        'required'       => false,
+                                        'required'       => true,
                                         'allow_multiple' => true,
                                         'order_text'     => 'follows @author',
                                        ),
                        'license'    => array(
-                                        'required'       => false,
+                                        'required'       => true,
                                         'allow_multiple' => false,
                                         'order_text'     => 'follows @copyright (if used) or @author',
                                        ),
@@ -352,7 +352,7 @@ class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
      */
     protected function processTags($commentStart, $commentEnd)
     {
-        $docBlock    = (get_class($this) === 'PEAR_Sniffs_Commenting_FileCommentSniff') ? 'file' : 'class';
+        $docBlock    = (get_class($this) === 'Lunr_Sniffs_Commenting_FileCommentSniff') ? 'file' : 'class';
         $foundTags   = $this->commentParser->getTagOrders();
         $orderIndex  = 0;
         $indentation = array();
