@@ -378,13 +378,14 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
                     continue;
                 }
 
+                $expected = $this->calculateExpectedIndent($tokens, $stackPtr) + 4;
                 if ($tokens[($value['value'] - 1)]['code'] === T_WHITESPACE) {
                     // A whitespace token before this value means that the value
                     // was indented and not flush with the opening parenthesis.
-                    if ($tokens[$value['value']]['column'] !== ($keywordStart + 1)) {
+                    if ($tokens[$value['value']]['column'] !== $expected) {
                         $error = 'Array value not aligned correctly; expected %s spaces but found %s';
                         $data  = array(
-                                  ($keywordStart + 1),
+                                  $expected,
                                   $tokens[$value['value']]['column'],
                                  );
                         $phpcsFile->addError($error, $value['value'], 'ValueNotAligned', $data);
