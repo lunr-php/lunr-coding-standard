@@ -12,7 +12,9 @@
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
 
-   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
+  <rule ref="Squiz.Operators.ValidLogicalOperators"/>
+
+  <rule ref="PEAR.Classes.ClassDeclaration"/>
 
   <!-- Lines can be 85 chars long, but never show errors -->
   <rule ref="Generic.Files.LineLength">
