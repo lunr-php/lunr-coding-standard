@@ -16,6 +16,9 @@
 
   <rule ref="PEAR.Classes.ClassDeclaration"/>
 
+  <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+  <rule ref="PSR2.Namespaces.UseDeclaration"/>
+
   <!-- Lines can be 85 chars long, but never show errors -->
   <rule ref="Generic.Files.LineLength">
     <properties>
