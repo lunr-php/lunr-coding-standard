@@ -38,4 +38,11 @@
       <property name="eolChar" value="\n"/>
     </properties>
   </rule>
+
+  <!-- Function Declaration Argument Spacing -->
+  <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+    <properties>
+      <property name="equalsSpacing" value="1"/>
+    </properties>
+  </rule>
 </ruleset>
