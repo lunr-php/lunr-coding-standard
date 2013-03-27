@@ -196,7 +196,7 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
             return;
         }//end if
 
-        $expected = $this->calculateExpectedIndent($tokens, $stackPtr);
+        $expected = $this->calculateExpectedIndent($phpcsFile, $tokens, $stackPtr);
         // Check the closing bracket is on a new line.
         $lastContent = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), $arrayStart, true);
         if ($tokens[$lastContent]['line'] !== ($tokens[$arrayEnd]['line'] - 1)) {
@@ -378,7 +378,7 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
                     continue;
                 }
 
-                $expected = $this->calculateExpectedIndent($tokens, $stackPtr) + 4;
+                $expected = $this->calculateExpectedIndent($phpcsFile, $tokens, $stackPtr) + 4;
                 if ($tokens[($value['value'] - 1)]['code'] === T_WHITESPACE) {
                     // A whitespace token before this value means that the value
                     // was indented and not flush with the opening parenthesis.
@@ -417,7 +417,7 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
 
         $numValues = count($indices);
 
-        $indicesStart = $this->calculateExpectedIndent($tokens, $stackPtr) + 4;
+        $indicesStart = $this->calculateExpectedIndent($phpcsFile, $tokens, $stackPtr) + 4;
         $arrowStart   = ($indicesStart + $maxLength + 1);
         $valueStart   = ($arrowStart + 3);
         $indexNumber  = 0;
@@ -524,7 +524,7 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
      *
      * @return int
      */
-    protected function calculateExpectedIndent(array $tokens, $stackPtr)
+    protected function calculateExpectedIndent(PHP_CodeSniffer_File $phpcsFile, array $tokens, $stackPtr)
     {
         $conditionStack = array();
 
@@ -550,6 +550,8 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
 
         $indent = 0;
 
+        $object_op = $phpcsFile->findPrevious(T_OBJECT_OPERATOR, ($stackPtr - 1));
+
         $tokenConditions = $tokens[$stackPtr]['conditions'];
         foreach ($tokenConditions as $id => $condition) {
             // If it's an indenting scope ie. it's not in our array of
@@ -564,6 +566,20 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
                     $indent = ($tokens[$id]['column'] - 1);
                 }
 
+                // Having an object operator on the previous line could mean that
+                // the array is a parameter to the method called there. In that case
+                // we want to change the base of the indent close to the object operator
+                if (($object_op !== FALSE) && ($tokens[$object_op]['line'] === $tokens[$stackPtr]['line'] - 1))
+                {
+                    // Check that the array is actually an argument to the method called before.
+                    $lineEnd = $phpcsFile->findPrevious(T_SEMICOLON, ($stackPtr - 1));
+
+                    if ($tokens[$stackPtr]['line'] !== $tokens[$lineEnd]['line'] + 1)
+                    {
+                        $indent = ($tokens[$object_op]['column'] - ($tokens[$object_op]['column'] % $this->indent));
+                    }
+                }
+
                 $indent += $this->indent;
             }
         }
@@ -571,6 +587,7 @@ class Lunr_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
         // Increase by 1 to indiciate that the code should start at a specific column.
         // E.g., code indented 4 spaces should start at column 5.
         $indent++;
+
         return $indent;
 
     }//end calculateExpectedIndent()
