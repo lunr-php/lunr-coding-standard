@@ -14,8 +14,8 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_CommentParser_FunctionCommentParser not found');
+if (class_exists('Lunr_CommentParser_FunctionCommentParser', true) === false) {
+    throw new PHP_CodeSniffer_Exception('Class Lunr_CommentParser_FunctionCommentParser not found');
 }
 
 /**
@@ -90,6 +90,33 @@ class Lunr_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sni
      */
     protected $stackPtr = null;
 
+    /**
+     * Tags in correct order and related info.
+     *
+     * @var array
+     */
+    protected $tags = array(
+                       'expectedException'   => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'precedes @dataProvider or @covers if present',
+                                       ),
+                       'depends'   => array(
+                                        'required'       => false,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'precedes @dataProvider or @covers if present',
+                                       ),
+                       'dataProvider'    => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'follows @depends if present',
+                                       ),
+                       'covers' => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'follows @dataProvider or @depends if present',
+                                       ),
+                );
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -184,7 +211,7 @@ class Lunr_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sni
         $this->_methodName = $phpcsFile->getDeclarationName($stackPtr);
 
         try {
-            $this->commentParser = new PHP_CodeSniffer_CommentParser_FunctionCommentParser($comment, $phpcsFile);
+            $this->commentParser = new Lunr_CommentParser_FunctionCommentParser($comment, $phpcsFile);
             $this->commentParser->parse();
         } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
             $line = ($e->getLineWithinComment() + $commentStart);
@@ -274,6 +301,64 @@ class Lunr_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sni
             $this->currentFile->addError($error, $commentEnd, 'SpacingAfter');
         }
 
+        $longestTag = 0;
+
+        foreach ($this->tags as $tag => $info)
+        {
+            $len = strlen($tag);
+
+            $tagName    = ucfirst($tag);
+            $getMethod  = 'get'.$tagName;
+            $tagElement = $this->commentParser->$getMethod();
+
+            if (is_array($tagElement) === true) {
+                foreach ($tagElement as $key => $element) {
+                    $indentation[] = array(
+                                        'tag'   => $tag,
+                                        'space' => $this->getIndentation($tag, $element),
+                                        'line'  => $element->getLine(),
+                                        );
+
+                    if ($this->getIndentation($tag, $element) !== 0 && $len > $longestTag)
+                    {
+                        $longestTag = $len;
+                    }
+                }
+            } else {
+                $indentation[] = array(
+                                    'tag'   => $tag,
+                                    'space' => $this->getIndentation($tag, $tagElement),
+                                    );
+                if ($this->getIndentation($tag, $tagElement) !== 0 && $len > $longestTag)
+                {
+                    $longestTag = $len;
+                }
+            }
+
+        }
+
+        foreach ($indentation as $indentInfo) {
+
+            if ($indentInfo['space'] !== 0
+                && $indentInfo['space'] !== ($longestTag + 1)
+            ) {
+                $expected = (($longestTag - strlen($indentInfo['tag'])) + 1);
+                $space    = ($indentInfo['space'] - strlen($indentInfo['tag']));
+                $error    = "@$indentInfo[tag] tag comment indented incorrectly. ";
+                $error   .= "Expected $expected spaces but found $space.";
+
+                $getTagMethod = 'get'.ucfirst($indentInfo['tag']);
+
+                if ($this->tags[$indentInfo['tag']]['allow_multiple'] === true) {
+                    $line = $indentInfo['line'];
+                } else {
+                    $tagElem = $this->commentParser->$getTagMethod();
+                    $line    = $tagElem->getLine();
+                }
+
+                $this->currentFile->addError($error, ($commentStart + $line));
+            }
+        }
     }//end process()
 
 
@@ -548,6 +633,34 @@ class Lunr_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sni
         }
 
     }//end processParams()
+
+
+    /**
+     * Get the indentation information of each tag.
+     *
+     * @param string                                   $tagName    The name of the
+     *                                                             doc comment
+     *                                                             element.
+     * @param PHP_CodeSniffer_CommentParser_DocElement $tagElement The doc comment
+     *                                                             element.
+     *
+     * @return void
+     */
+    protected function getIndentation($tagName, $tagElement)
+    {
+        if ($tagElement instanceof PHP_CodeSniffer_CommentParser_SingleElement) {
+            if ($tagElement->getContent() !== '') {
+                return (strlen($tagName) + substr_count($tagElement->getWhitespaceBeforeContent(), ' '));
+            }
+        } else if ($tagElement instanceof PHP_CodeSniffer_CommentParser_PairElement) {
+            if ($tagElement->getValue() !== '') {
+                return (strlen($tagName) + substr_count($tagElement->getWhitespaceBeforeValue(), ' '));
+            }
+        }
+
+        return 0;
+
+    }//end getIndentation()
 
 
 }//end class
