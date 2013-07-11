@@ -14,8 +14,8 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PHP_CodeSniffer_CommentParser_ClassCommentParser', true) === false) {
-    $error = 'Class PHP_CodeSniffer_CommentParser_ClassCommentParser not found';
+if (class_exists('Lunr_CommentParser_ClassCommentParser', true) === false) {
+    $error = 'Class Lunr_CommentParser_ClassCommentParser not found';
     throw new PHP_CodeSniffer_Exception($error);
 }
 
@@ -113,6 +113,16 @@ class Lunr_Sniffs_Commenting_ClassCommentSniff extends Lunr_Sniffs_Commenting_Fi
                                         'allow_multiple' => false,
                                         'order_text'     => 'follows @since (if used) or @see (if used) or @link',
                                        ),
+                       'covers'     => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'follows @deprecated (if used) @since (if used) or @see (if used) or @link',
+                                       ),
+                       'backupGlobals' => array(
+                                        'required'       => false,
+                                        'allow_multiple' => false,
+                                        'order_text'     => 'follows @deprecated (if used) @since (if used) or @see (if used) or @link',
+                                       ),
                 );
 
     /**
@@ -206,7 +216,7 @@ class Lunr_Sniffs_Commenting_ClassCommentSniff extends Lunr_Sniffs_Commenting_Fi
 
         // Parse the class comment.docblock.
         try {
-            $this->commentParser = new PHP_CodeSniffer_CommentParser_ClassCommentParser($comment, $phpcsFile);
+            $this->commentParser = new Lunr_CommentParser_ClassCommentParser($comment, $phpcsFile);
             $this->commentParser->parse();
         } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
             $line = ($e->getLineWithinComment() + $commentStart);

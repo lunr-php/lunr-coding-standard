@@ -14,8 +14,8 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PHP_CodeSniffer_CommentParser_ClassCommentParser', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_CommentParser_ClassCommentParser not found');
+if (class_exists('Lunr_CommentParser_ClassCommentParser', true) === false) {
+    throw new PHP_CodeSniffer_Exception('Class Lunr_CommentParser_ClassCommentParser not found');
 }
 
 /**
@@ -49,7 +49,7 @@ class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
     /**
      * The header comment parser for the current file.
      *
-     * @var PHP_CodeSniffer_Comment_Parser_ClassCommentParser
+     * @var Lunr_CommentParser_ClassCommentParser
      */
     protected $commentParser = null;
 
@@ -258,7 +258,7 @@ class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
             // Parse the header comment docblock.
             try {
-                $this->commentParser = new PHP_CodeSniffer_CommentParser_ClassCommentParser($comment, $phpcsFile);
+                $this->commentParser = new Lunr_CommentParser_ClassCommentParser($comment, $phpcsFile);
                 $this->commentParser->parse();
             } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
                 $line = ($e->getLineWithinComment() + $commentStart);
