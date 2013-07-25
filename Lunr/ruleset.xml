@@ -13,7 +13,6 @@
 
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
   <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
-  <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
   <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 
   <rule ref="PEAR.Classes.ClassDeclaration"/>
