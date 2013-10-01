@@ -101,6 +101,11 @@ class Lunr_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sni
                                         'allow_multiple' => false,
                                         'order_text'     => 'precedes @dataProvider or @covers if present',
                                        ),
+                       'requires'   => array(
+                                        'required'       => false,
+                                        'allow_multiple' => true,
+                                        'order_text'     => 'precedes @dataProvider or @covers if present',
+                                       ),
                        'depends'   => array(
                                         'required'       => false,
                                         'allow_multiple' => true,

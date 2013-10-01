@@ -70,6 +70,13 @@ class Lunr_CommentParser_FunctionCommentParser extends PHP_CodeSniffer_CommentPa
     private $_depends = array();
 
     /**
+     * The requires elements of this class.
+     *
+     * @var array(SingleElement)
+     */
+    private $_requires = array();
+
+    /**
      * The dataProvder element of this class.
      *
      * @var SingleElement
@@ -171,7 +178,28 @@ class Lunr_CommentParser_FunctionCommentParser extends PHP_CodeSniffer_CommentPa
         $this->_depends[] = $depends;
         return $depends;
 
-    }//end parseAuthor()
+    }//end parseDepends()
+
+    /**
+     * Parses the requires elements.
+     *
+     * @param array $tokens The tokens that comprise this tag.
+     *
+     * @return array(PHP_CodeSniffer_CommentParser_SingleElement)
+     */
+    protected function parseRequires($tokens)
+    {
+        $requires = new PHP_CodeSniffer_CommentParser_SingleElement(
+            $this->previousElement,
+            $tokens,
+            'requires',
+            $this->phpcsFile
+        );
+
+        $this->_requires[] = $requires;
+        return $requires;
+
+    }//end parseRequires()
 
     /**
      * Returns the parameter elements that this function comment contains.
@@ -223,6 +251,20 @@ class Lunr_CommentParser_FunctionCommentParser extends PHP_CodeSniffer_CommentPa
      *
      * @return array(PHP_CodeSniffer_CommentParser_PairElement)
      */
+    public function getRequires()
+    {
+        return $this->_requires;
+
+    }//end getThrows()
+
+
+    /**
+     * Returns the throws elements in this function comment.
+     *
+     * Returns empty array if no throws elements in the comment.
+     *
+     * @return array(PHP_CodeSniffer_CommentParser_PairElement)
+     */
     public function getExpectedException()
     {
         return $this->_expectedException;
@@ -244,6 +286,7 @@ class Lunr_CommentParser_FunctionCommentParser extends PHP_CodeSniffer_CommentPa
                 'covers' => false,
                 'dataProvider' => false,
                 'depends' => false,
+                'requires' => false,
                 'expectedException' => false,
                );
 
