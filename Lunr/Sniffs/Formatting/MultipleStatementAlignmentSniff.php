@@ -233,6 +233,13 @@ class Lunr_Sniffs_Formatting_MultipleStatementAlignmentSniff implements PHP_Code
 
         // Determine the actual position that each equals sign should be in.
         foreach ($assignments as $assignment) {
+
+            //ignore double arrows
+            if ($tokens[$assignment]['type'] === 'T_DOUBLE_ARROW')
+            {
+                continue;
+            }
+
             // Actual column takes into account the length of the assignment operator.
             $actualColumn = ($column + $maxAssignmentLength - strlen($tokens[$assignment]['content']));
             if ($tokens[$assignment]['column'] !== $actualColumn) {
