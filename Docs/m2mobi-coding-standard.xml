@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" class="specification">
     <info>
-        <title>Lunr Coding Standard for PHP</title>
+        <title>M2mobi Coding Standard for PHP</title>
         <authorgroup>
             <author xml:id="hmw"><personname><firstname>Heinz</firstname><surname>Wiesinger</surname></personname></author>
         </authorgroup>

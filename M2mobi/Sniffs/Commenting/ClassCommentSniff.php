@@ -32,7 +32,7 @@
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Lunr_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Sniff
+class M2mobi_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Sniff
 {
 
 

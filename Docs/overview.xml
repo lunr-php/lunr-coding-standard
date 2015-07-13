@@ -2,7 +2,7 @@
 <title>Overview</title>
     <section xml:id="scope">
         <title>Scope</title>
-        <para>This document provides rules for code formatting and documentation to individuals and teams contributing to Lunr. It is also encouraged to conform to this standard in projects based on Lunr, to keep a consistent coding style across projects. Further it should be noted that this Coding Standard is a work-in-progress and will be extended over time.</para>
+        <para>This document provides rules for code formatting and documentation to individuals and teams contributing to M2mobi projects. Further it should be noted that this Coding Standard is a work-in-progress and will be extended over time.</para>
     </section>
     <section xml:id="goal">
         <title>Goal</title>

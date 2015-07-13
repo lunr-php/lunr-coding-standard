@@ -26,7 +26,7 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
+class M2mobi_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 {
 
     /**

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Lunr">
-  <description>Lunr Framework Coding Standard</description>
+<ruleset name="M2mobi">
+  <description>M2mobi Framework Coding Standard</description>
 
   <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>

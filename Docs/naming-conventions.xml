@@ -2,7 +2,7 @@
 <title>Naming Conventions</title>
     <section xml:id="classes">
         <title>Classes</title>
-        <para>Class names in Lunr should not contain references to the directories in which they are stored. This role is already taken by the namespace. It should be rather a short concise name to describe the content of the class.</para>
+        <para>Class names in M2mobi projects should not contain references to the directories in which they are stored. This role is already taken by the namespace. It should be rather a short concise name to describe the content of the class.</para>
         <para>Class names may only contain alphanumeric characters. Underscores are not permitted. If a class name is comprised of more than one word, the first
         letter of each Word must be capitalized. Successive capitalized letters are permitted but discouraged.</para>
     </section>
@@ -29,8 +29,8 @@
     </section>
     <section xml:id="filenames">
         <title>Filenames</title>
-        <para>Filenames in Lunr need to follow a very strict naming scheme, so as to not break class autoloading. Filenames may contain alphanumeric characters as well the "." (dot). Underscores and dashes are not permitted.</para>
-        <para>The basic file naming scheme within Lunr is category.componentname.inc.php.</para>
+        <para>Filenames in M2mobi projects need to follow a very strict naming scheme, so as to not break class autoloading. Filenames may contain alphanumeric characters as well the "." (dot). Underscores and dashes are not permitted.</para>
+        <para>The basic file naming scheme within M2mobi projects is category.componentname.inc.php.</para>
         <para>"componentname" is either the class name or the interface name, or if it is a resource file the class or interface name it belongs to.</para>
         <para>"category" is dependent on the content of the file. For classes this is "class" and for interfaces "interface". MVC classes are an exception. For those "category" is "controller", "model" or "view" respectively. HTML files with or without inline php code have a category of "html".</para>
         <para>As an additional rule, MVC-classes as well as Interfaces must not contain their category value within their componentname. As an example <function>controller.user.inc.php</function> is a valid filename for the class UserController, whereas <function>class.usercontroller.inc.php</function> is not.</para>
