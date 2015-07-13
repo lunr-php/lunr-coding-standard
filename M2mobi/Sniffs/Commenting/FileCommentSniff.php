@@ -95,8 +95,6 @@ class M2mobi_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         $required = array(
                      '@package'    => true,
                      '@author'     => true,
-                     '@copyright'  => true,
-                     '@license'    => true,
                     );
 
         $foundTags = array();
