@@ -12,6 +12,11 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+ namespace Lunr\Sniffs\Commenting;
+
+ use PHP_CodeSniffer\Sniffs\Sniff;
+ use PHP_CodeSniffer\Files\File;
+ use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Parses and verifies the file doc comment.
@@ -26,7 +31,7 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
+class FileCommentSniff implements Sniff
 {
 
     /**
@@ -55,13 +60,13 @@ class Lunr_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
      *
      * @return int
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $this->currentFile = $phpcsFile;
 
