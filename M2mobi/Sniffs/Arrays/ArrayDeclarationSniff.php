@@ -12,6 +12,11 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+ namespace M2mobi\Sniffs\Arrays;
+
+ use PHP_CodeSniffer\Sniffs\Sniff;
+ use PHP_CodeSniffer\Files\File;
+ use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * A test to ensure that arrays conform to the array coding standard.
@@ -25,7 +30,7 @@
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Sniff
+class ArrayDeclarationSniff implements Sniff
 {
 
 
@@ -47,13 +52,13 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The current file being checked.
+     * @param File $phpcsFile The current file being checked.
      * @param int                  $stackPtr  The position of the current token in
      *                                        the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -135,7 +140,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
     /**
      * Processes a single-line array definition.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile  The current file being checked.
+     * @param File $phpcsFile  The current file being checked.
      * @param int                  $stackPtr   The position of the current token
      *                                         in the stack passed in $tokens.
      * @param int                  $arrayStart The token that starts the array definition.
@@ -143,7 +148,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
      *
      * @return void
      */
-    public function processSingleLineArray(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $arrayStart, $arrayEnd)
+    public function processSingleLineArray(File $phpcsFile, $stackPtr, $arrayStart, $arrayEnd)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -284,7 +289,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
     /**
      * Processes a multi-line array definition.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile  The current file being checked.
+     * @param File $phpcsFile  The current file being checked.
      * @param int                  $stackPtr   The position of the current token
      *                                         in the stack passed in $tokens.
      * @param int                  $arrayStart The token that starts the array definition.
@@ -292,7 +297,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
      *
      * @return void
      */
-    public function processMultiLineArray(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $arrayStart, $arrayEnd)
+    public function processMultiLineArray(File $phpcsFile, $stackPtr, $arrayStart, $arrayEnd)
     {
         $tokens         = $phpcsFile->getTokens();
         $statementStart = $tokens[$phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr, TRUE)]['column'];
@@ -459,7 +464,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
                     }
 
                     $valueContent = $phpcsFile->findNext(
-                        PHP_CodeSniffer_Tokens::$emptyTokens,
+                        Tokens::$emptyTokens,
                         ($lastToken + 1),
                         $nextToken,
                         true
@@ -502,7 +507,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
 
                 // Find the value of this index.
                 $nextContent = $phpcsFile->findNext(
-                    PHP_CodeSniffer_Tokens::$emptyTokens,
+                    Tokens::$emptyTokens,
                     ($nextToken + 1),
                     $arrayEnd,
                     true
@@ -521,7 +526,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
             $singleValue = true;
         } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
             // There may be another array value without a comma.
-            $exclude     = PHP_CodeSniffer_Tokens::$emptyTokens;
+            $exclude     = Tokens::$emptyTokens;
             $exclude[]   = T_COMMA;
             $nextContent = $phpcsFile->findNext($exclude, ($indices[0]['value'] + 1), $arrayEnd, true);
             if ($nextContent === false) {
@@ -575,7 +580,7 @@ class M2mobi_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_Snif
             $lastIndex = $indices[($count - 1)]['value'];
 
             $trailingContent = $phpcsFile->findPrevious(
-                PHP_CodeSniffer_Tokens::$emptyTokens,
+                Tokens::$emptyTokens,
                 ($arrayEnd - 1),
                 $lastIndex,
                 true

@@ -11,6 +11,11 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+namespace M2mobi\Sniffs\ControlStructures;
+
+ use PHP_CodeSniffer\Sniffs\Sniff;
+ use PHP_CodeSniffer\Files\File;
+ use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * PEAR_Sniffs_ControlStructures_MultiLineConditionSniff.
@@ -25,7 +30,7 @@
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class M2mobi_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_CodeSniffer_Sniff
+class MultiLineConditionSniff implements Sniff
 {
 
     /**
@@ -64,13 +69,13 @@ class M2mobi_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_Cod
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -129,7 +134,7 @@ class M2mobi_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_Cod
                             if ($tokens[$next]['code'] !== T_COMMENT) {
                                 $phpcsFile->fixer->addNewlineBefore($closeBracket);
                             } else {
-                                $next = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($next + 1), null, true);
+                                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
                                 $phpcsFile->fixer->beginChangeset();
                                 $phpcsFile->fixer->replaceToken($closeBracket, '');
                                 $phpcsFile->fixer->addContentBefore($next, ')');
@@ -178,13 +183,13 @@ class M2mobi_Sniffs_ControlStructures_MultiLineConditionSniff implements PHP_Cod
                 }
 
                 if ($tokens[$i]['line'] !== $tokens[$closeBracket]['line']) {
-                    $next = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, $i, null, true);
-                    if (isset(PHP_CodeSniffer_Tokens::$booleanOperators[$tokens[$next]['code']]) === false) {
+                    $next = $phpcsFile->findNext(Tokens::$emptyTokens, $i, null, true);
+                    if (isset(Tokens::$booleanOperators[$tokens[$next]['code']]) === false) {
                         $error = 'Each line in a multi-line IF statement must begin with a boolean operator';
                         $fix   = $phpcsFile->addFixableError($error, $i, 'StartWithBoolean');
                         if ($fix === true) {
-                            $prev = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($i - 1), $openBracket, true);
-                            if (isset(PHP_CodeSniffer_Tokens::$booleanOperators[$tokens[$prev]['code']]) === true) {
+                            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), $openBracket, true);
+                            if (isset(Tokens::$booleanOperators[$tokens[$prev]['code']]) === true) {
                                 $phpcsFile->fixer->beginChangeset();
                                 $phpcsFile->fixer->replaceToken($prev, '');
                                 $phpcsFile->fixer->addContentBefore($next, $tokens[$prev]['content'].' ');
