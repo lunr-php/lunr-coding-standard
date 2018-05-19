@@ -2,6 +2,7 @@
 <ruleset name="Lunr">
   <description>Lunr Framework Coding Standard</description>
 
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
