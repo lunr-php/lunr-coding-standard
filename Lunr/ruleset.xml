@@ -26,6 +26,17 @@
   <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
   <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
+  <rule ref="Squiz.Scope.MethodScope"/>
+  <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+
+  <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+  <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+  <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+    <properties>
+      <property name="equalsSpacing" value="1"/>
+    </properties>
+  </rule>
+
   <!-- Lines can be 85 chars long, but never show errors -->
   <rule ref="Generic.Files.LineLength">
     <properties>
