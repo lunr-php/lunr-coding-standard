@@ -34,6 +34,9 @@
     </properties>
   </rule>
 
+  <!-- All PHP files MUST end with a non-blank line, terminated with a single LF. -->
+  <rule ref="PSR2.Files.EndFileNewline"/>
+
   <!-- Use Unix newlines -->
   <rule ref="Generic.Files.LineEndings">
     <properties>
