@@ -30,6 +30,11 @@
   <rule ref="Squiz.Scope.MethodScope"/>
   <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
 
+  <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
+  <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.LineAfterClose">
+    <severity>0</severity>
+  </rule>
+
   <rule ref="PSR2.Methods.FunctionClosingBrace"/>
   <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
   <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
