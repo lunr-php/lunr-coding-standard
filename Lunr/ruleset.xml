@@ -41,6 +41,16 @@
     <severity>0</severity>
   </rule>
 
+  <rule ref="Lunr.Commenting.FunctionComment.ScalarTypeHintMissing">
+      <severity>0</severity>
+  </rule>
+  <rule ref="Lunr.Commenting.FunctionComment.TypeHintMissing">
+      <severity>0</severity>
+  </rule>
+  <rule ref="Lunr.Commenting.FunctionComment.ParamCommentFullStop">
+      <severity>0</severity>
+  </rule>
+
   <rule ref="PSR2.Methods.FunctionClosingBrace"/>
   <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
   <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
