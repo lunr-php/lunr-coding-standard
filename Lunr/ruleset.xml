@@ -22,6 +22,7 @@
   <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 
   <rule ref="PEAR.Classes.ClassDeclaration"/>
+  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
   <rule ref="PEAR.Files.IncludingFile"/>
 
   <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
