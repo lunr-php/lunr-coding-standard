@@ -45,6 +45,20 @@
     </properties>
   </rule>
 
+  <rule ref="Generic.Arrays.ArrayIndent"/>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.KeyNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.ValueNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNewLine">
+    <severity>0</severity>
+  </rule>
+
   <!-- Lines can be 85 chars long, but never show errors -->
   <rule ref="Generic.Files.LineLength">
     <properties>
