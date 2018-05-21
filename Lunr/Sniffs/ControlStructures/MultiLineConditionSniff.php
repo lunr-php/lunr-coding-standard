@@ -232,6 +232,10 @@ class MultiLineConditionSniff implements Sniff
             return;
         }
 
+        if ($tokens[$openBrace]['code'] === T_COLON) {
+            return;
+        }
+
         if ($tokens[$openBrace]['line'] > $tokens[$closeBracket]['line']) {
             $length = -1;
         } else if ($openBrace === ($closeBracket + 1)) {
