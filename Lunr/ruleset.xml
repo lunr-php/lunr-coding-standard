@@ -8,7 +8,6 @@
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
   <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
-  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.PHP.ForbiddenFunctions"/>
   <rule ref="Generic.PHP.NoSilencedErrors"/>
   <rule ref="Generic.PHP.UpperCaseConstant"/>
@@ -70,6 +69,11 @@
     <severity>0</severity>
   </rule>
   <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNewLine">
+    <severity>0</severity>
+  </rule>
+
+  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+  <rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
     <severity>0</severity>
   </rule>
 
