@@ -11,7 +11,7 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-namespace M2mobi\Sniffs\ControlStructures;
+ namespace M2mobi\Sniffs\ControlStructures;
 
  use PHP_CodeSniffer\Sniffs\Sniff;
  use PHP_CodeSniffer\Files\File;
@@ -229,6 +229,10 @@ class MultiLineConditionSniff implements Sniff
         $next      = $phpcsFile->findNext(T_WHITESPACE, ($closeBracket + 1), $openBrace, true);
         if ($next !== false) {
             // Probably comments in between tokens, so don't check.
+            return;
+        }
+
+        if ($tokens[$openBrace]['code'] === T_COLON) {
             return;
         }
 

@@ -2,12 +2,12 @@
 <ruleset name="M2mobi">
   <description>M2mobi Framework Coding Standard</description>
 
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
   <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
-  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.PHP.ForbiddenFunctions"/>
   <rule ref="Generic.PHP.NoSilencedErrors"/>
   <rule ref="Generic.PHP.UpperCaseConstant"/>
@@ -21,18 +21,74 @@
   <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 
   <rule ref="PEAR.Classes.ClassDeclaration"/>
+  <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
   <rule ref="PEAR.Files.IncludingFile"/>
 
   <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
   <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
+  <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
+  <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
+  <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+  <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+
+  <rule ref="Squiz.Scope.MethodScope"/>
+  <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+
+  <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
+  <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.LineAfterClose">
+    <severity>0</severity>
+  </rule>
+
+  <rule ref="M2mobi.Commenting.FunctionComment.ScalarTypeHintMissing">
+      <severity>0</severity>
+  </rule>
+  <rule ref="M2mobi.Commenting.FunctionComment.TypeHintMissing">
+      <severity>0</severity>
+  </rule>
+  <rule ref="M2mobi.Commenting.FunctionComment.ParamCommentFullStop">
+      <severity>0</severity>
+  </rule>
+
+  <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+  <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+  <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+    <properties>
+      <property name="equalsSpacing" value="1"/>
+    </properties>
+  </rule>
+
+  <rule ref="Generic.Arrays.ArrayIndent"/>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.KeyNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.ValueNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNewLine">
+    <severity>0</severity>
+  </rule>
+
+  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+  <rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
+    <severity>0</severity>
+  </rule>
+
   <!-- Lines can be 85 chars long, but never show errors -->
   <rule ref="Generic.Files.LineLength">
     <properties>
       <property name="lineLimit" value="150"/>
-      <property name="absoluteLineLimit" value="170"/>
+      <property name="absoluteLineLimit" value="0"/>
     </properties>
   </rule>
+
+  <!-- All PHP files MUST end with a non-blank line, terminated with a single LF. -->
+  <rule ref="PSR2.Files.EndFileNewline"/>
+
+  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
   <!-- Use Unix newlines -->
   <rule ref="Generic.Files.LineEndings">

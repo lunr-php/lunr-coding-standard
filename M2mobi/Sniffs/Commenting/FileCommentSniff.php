@@ -30,6 +30,7 @@
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
+
 class FileCommentSniff implements Sniff
 {
 
