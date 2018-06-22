@@ -102,7 +102,7 @@ class ControlSignatureSniff implements Sniff
             }
         }
 
-        if (in_array($tokens[$stackPtr]['code'], [ T_ELSE, T_TRY ]) && $found !== 'newline' && $isAlternative === false) {
+        if (in_array($tokens[$stackPtr]['code'], [ T_ELSE, T_TRY, T_DO, T_FINALLY ]) && $found !== 'newline' && $isAlternative === false) {
             $error = 'Expected newline after %s keyword; %s space(s) found';
             $data  = [
                 strtoupper($tokens[$stackPtr]['content']),
@@ -125,7 +125,7 @@ class ControlSignatureSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-        elseif ($found !== $expected && (!in_array($tokens[$stackPtr]['code'], [ T_ELSE, T_TRY ]) || $isAlternative === true )) {
+        elseif ($found !== $expected && (!in_array($tokens[$stackPtr]['code'], [ T_ELSE, T_TRY, T_DO, T_FINALLY ]) || $isAlternative === true )) {
             $error = 'Expected %s space(s) after %s keyword; %s found';
             $data  = [
                 $expected,
