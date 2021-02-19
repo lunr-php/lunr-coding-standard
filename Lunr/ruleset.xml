@@ -19,6 +19,7 @@
   <rule ref="Generic.PHP.UpperCaseConstant"/>
   <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+  <rule ref="Generic.WhiteSpace.IncrementDecrementSpacing"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
 
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
