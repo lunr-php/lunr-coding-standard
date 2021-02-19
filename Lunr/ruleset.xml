@@ -27,6 +27,7 @@
   <rule ref="PSR12.Files.OpenTag"/>
   <rule ref="PSR12.Functions.NullableTypeDeclaration"/>
   <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
+  <rule ref="PSR12.Keywords.ShortFormTypeKeywords"/>
 
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
   <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
