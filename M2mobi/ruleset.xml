@@ -3,17 +3,32 @@
   <description>M2mobi Framework Coding Standard</description>
 
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
+  <rule ref="Generic.Files.OneObjectStructurePerFile"/>
   <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
+  <rule ref="Generic.Formatting.SpaceAfterCast"/>
+  <rule ref="Generic.Functions.CallTimePassByReference"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+  <rule ref="Generic.NamingConventions.ConstructorName"/>
   <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+  <rule ref="Generic.PHP.BacktickOperator"/>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
   <rule ref="Generic.PHP.ForbiddenFunctions"/>
   <rule ref="Generic.PHP.NoSilencedErrors"/>
   <rule ref="Generic.PHP.UpperCaseConstant"/>
   <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+  <rule ref="Generic.WhiteSpace.IncrementDecrementSpacing"/>
+  <rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
+  <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
+
+  <rule ref="PSR12.Files.OpenTag"/>
+  <rule ref="PSR12.Functions.NullableTypeDeclaration"/>
+  <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
+  <rule ref="PSR12.Keywords.ShortFormTypeKeywords"/>
+  <rule ref="PSR12.Properties.ConstantVisibility"/>
 
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
   <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
@@ -22,6 +37,7 @@
 
   <rule ref="PEAR.Classes.ClassDeclaration"/>
   <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
+  <rule ref="Squiz.Classes.DuplicateProperty"/>
   <rule ref="PEAR.Files.IncludingFile"/>
 
   <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
