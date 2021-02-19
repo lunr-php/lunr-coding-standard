@@ -25,6 +25,7 @@
   <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
 
   <rule ref="PSR12.Files.OpenTag"/>
+  <rule ref="PSR12.Functions.NullableTypeDeclaration"/>
 
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
   <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
