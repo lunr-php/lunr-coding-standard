@@ -24,6 +24,8 @@
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
   <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
 
+  <rule ref="PSR12.Files.OpenTag"/>
+
   <rule ref="Squiz.Operators.ValidLogicalOperators"/>
   <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
   <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
