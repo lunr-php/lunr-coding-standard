@@ -4,6 +4,7 @@
 
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
+  <rule ref="Generic.Files.OneObjectStructurePerFile"/>
   <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
   <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
