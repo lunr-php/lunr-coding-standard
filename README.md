@@ -1,8 +1,10 @@
 # Format style
+
 ## Generic
 - Always use Unix line endings.
 - Lines should not be longer than 150 characters.
 - Don't use PHP Short open tags, except the short echo tags.
+- They PHP open tag should be on a line by itself.
 - Use 4 spaces for indentation. NO TABS.
 - Every scope change has a new 4 space indentation
 - Every file should have a closing PHP tag
@@ -12,6 +14,13 @@
 - Empty lines should not have whitespace.
 - There should never be multiple successive empty lines.
 - Lines should never end in whitespace.
+
+## General
+- PHP language constructs must be followed by a single whitespace.
+
+## Types
+- There must not be a space before the colon of a function return type declaration.
+- There must be one space after the colon of a function return type declaration.
 
 ## Collections
 - Arrays should always use the short syntax.
@@ -64,6 +73,7 @@ $config = [
 - There must be a single space after the scope keyword.
 - All class keywords must be lowercase.
 - Use declarations should be according to PRS-2  [psr-2/#3-namespace-and-use-declarations](https://www.php-fig.org/psr/psr-2/#3-namespace-and-use-declarations)
+- There must be only one class declaration per file
 
 ## Strings
 - Always have one space preceding and succeeding the concatenation symbol.
@@ -71,8 +81,12 @@ $config = [
 ## Operators
 - There must be one space before and after a logical operator.
 - All operators should have one space surrounding them.
+- There should be one space after a cast operator.
+- There should be no spaces between a variable and the increment/decrement operators.
+- There should be no spaces after the spread operator.
 
 # Code style
+
 ## PHP Function usage
 - Some function aliases should not be used.
 	- Use count instead of sizeof
@@ -80,12 +94,27 @@ $config = [
 - Functions that are deprecated in PHP should not be used.
 - Only ever use include_once in conditionals and use require_once otherwise.
 
+## Types
+- Nullable type declarations must not have a space between the question mark and the type name.
+- Use short versions of types:
+    - Use int instead of integer
+    - Use bool instead of boolean
+
 ## Strings
 - String concatenation should not be used if the string could be written as one string.
 - Double quotes should only be used when required, always use single quotes instead.
 
 ## Operators
-- Never use the logical "and" and "or" operators.  
+- Never use the logical "and" and "or" operators.
+- Never use the backtick operator.
+
+## Classes
+- Classes must use a PHP5 style constructor.
+- Class constants must have visibility declared.
 
 ## Functions
 - Empty functions should contain a //NO-OP comment.
+- Use of call-time pass-by-reference is not allowed.
+
+## Control structures
+- Use of [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions) is not allowed
