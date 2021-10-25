@@ -64,7 +64,146 @@ class FunctionCommentSniff extends SquizFunctionCommentSniff
             return;
         }
 
-        return parent::processReturn($phpcsFile, $stackPtr, $commentStart);
+        $return = null;
+
+        if ($this->skipIfInheritdoc === true) {
+            if ($this->checkInheritdoc($phpcsFile, $stackPtr, $commentStart) === true) {
+                return;
+            }
+        }
+
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
+            if ($tokens[$tag]['content'] === '@return') {
+                if ($return !== null) {
+                    $error = 'Only 1 @return tag is allowed in a function comment';
+                    $phpcsFile->addError($error, $tag, 'DuplicateReturn');
+                    return;
+                }
+
+                $return = $tag;
+            }
+        }
+
+        // Skip constructor and destructor.
+        $methodName      = $phpcsFile->getDeclarationName($stackPtr);
+        $isSpecialMethod = in_array($methodName,  $this->specialMethods, true);
+
+        if ($return !== null) {
+            $content = $tokens[($return + 2)]['content'];
+            if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING) {
+                $error = 'Return type missing for @return tag in function comment';
+                $phpcsFile->addError($error, $return, 'MissingReturnType');
+            } else {
+                // Support both a return type and a description.
+                preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9\[\]]+))*)( .*)?`i', $content, $returnParts);
+                if (isset($returnParts[1]) === false) {
+                    return;
+                }
+
+                $returnType = $returnParts[1];
+
+                // Check return type (can be multiple, separated by '|').
+                $typeNames      = explode('|', $returnType);
+                $suggestedNames = [];
+                foreach ($typeNames as $i => $typeName) {
+                    $suggestedName = $this->suggestType($typeName);
+                    if (in_array($suggestedName, $suggestedNames, true) === false) {
+                        $suggestedNames[] = $suggestedName;
+                    }
+                }
+
+                $suggestedType = implode('|', $suggestedNames);
+                if ($returnType !== $suggestedType) {
+                    $error = 'Expected "%s" but found "%s" for function return type';
+                    $data  = [
+                        $suggestedType,
+                        $returnType,
+                    ];
+                    $fix   = $phpcsFile->addFixableError($error, $return, 'InvalidReturn', $data);
+                    if ($fix === true) {
+                        $replacement = $suggestedType;
+                        if (empty($returnParts[2]) === false) {
+                            $replacement .= $returnParts[2];
+                        }
+
+                        $phpcsFile->fixer->replaceToken(($return + 2), $replacement);
+                        unset($replacement);
+                    }
+                }
+
+                // If the return type is void, make sure there is
+                // no return statement in the function.
+                if ($returnType === 'void') {
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken = $tokens[$stackPtr]['scope_closer'];
+                        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
+                            if ($tokens[$returnToken]['code'] === T_CLOSURE
+                                || $tokens[$returnToken]['code'] === T_ANON_CLASS
+                            ) {
+                                $returnToken = $tokens[$returnToken]['scope_closer'];
+                                continue;
+                            }
+
+                            if ($tokens[$returnToken]['code'] === T_RETURN
+                                || $tokens[$returnToken]['code'] === T_YIELD
+                                || $tokens[$returnToken]['code'] === T_YIELD_FROM
+                            ) {
+                                break;
+                            }
+                        }
+
+                        if ($returnToken !== $endToken) {
+                            // If the function is not returning anything, just
+                            // exiting, then there is no problem.
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
+                                $error = 'Function return type is void, but function contains return statement';
+                                $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
+                            }
+                        }
+                    }//end if
+                } else if ($returnType !== 'mixed' && in_array('void', $typeNames, true) === false) {
+                    // If return type is not void, there needs to be a return statement
+                    // somewhere in the function that returns something.
+                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                        $endToken = $tokens[$stackPtr]['scope_closer'];
+                        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
+                            if ($tokens[$returnToken]['code'] === T_CLOSURE
+                                || $tokens[$returnToken]['code'] === T_ANON_CLASS
+                            ) {
+                                $returnToken = $tokens[$returnToken]['scope_closer'];
+                                continue;
+                            }
+
+                            if ($tokens[$returnToken]['code'] === T_RETURN
+                                || $tokens[$returnToken]['code'] === T_YIELD
+                                || $tokens[$returnToken]['code'] === T_YIELD_FROM
+                            ) {
+                                break;
+                            }
+                        }
+
+                        if ($returnToken === $endToken) {
+                            $error = 'Function return type is not void, but function has no return statement';
+                            $phpcsFile->addError($error, $return, 'InvalidNoReturn');
+                        } else {
+                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+                            if ($tokens[$semicolon]['code'] === T_SEMICOLON) {
+                                $error = 'Function return type is not void, but function is returning void here';
+                                $phpcsFile->addError($error, $returnToken, 'InvalidReturnNotVoid');
+                            }
+                        }
+                    }//end if
+                }//end if
+            }//end if
+        } else {
+            if ($isSpecialMethod === true) {
+                return;
+            }
+
+            $error = 'Missing @return tag in function comment';
+            $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+        }//end if
     }//end processReturn()
 
     /**
@@ -484,6 +623,5 @@ class FunctionCommentSniff extends SquizFunctionCommentSniff
         }//end if
 
     }//end suggestType()
-
 
 }//end class
