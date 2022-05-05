@@ -4,7 +4,7 @@
 - Always use Unix line endings.
 - Lines should not be longer than 150 characters.
 - Don't use PHP Short open tags, except the short echo tags.
-- They PHP open tag should be on a line by itself.
+- The PHP open tag should be on a line by itself.
 - Use 4 spaces for indentation. NO TABS.
 - Every scope change has a new 4 space indentation
 - Every file should have a closing PHP tag
