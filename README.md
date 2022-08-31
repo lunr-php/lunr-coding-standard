@@ -118,3 +118,6 @@ $config = [
 
 ## Control structures
 - Use of [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions) is not allowed
+
+## Tests
+- Test classes should be ordered the same way the system under test is: tests for the first failure first, ending in the succesful cases.
