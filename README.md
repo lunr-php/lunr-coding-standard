@@ -118,3 +118,4 @@ $config = [
 
 ## Control structures
 - Use of [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions) is not allowed
+- Guard clauses should be used where possible to return from functions early
