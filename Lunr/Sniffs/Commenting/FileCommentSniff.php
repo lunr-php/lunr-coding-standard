@@ -98,12 +98,14 @@ class FileCommentSniff implements Sniff
 
         // Required tags in correct order.
         $required = array();
+        $allowed  = array();
 
         $foundTags = array();
         $previousName = NULL;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name       = $tokens[$tag]['content'];
             $isRequired = isset($required[$name]);
+            $isAllowed  = isset($allowed[$name]);
 
             if ($name === $previousName) {
                 continue;
@@ -119,6 +121,12 @@ class FileCommentSniff implements Sniff
             $previousName = $name;
 
             $foundTags[] = $name;
+
+            if (!$isAllowed) {
+                $error = '%s tag is not allowed in file comment';
+                $data  = array($tokens[$tag]['content']);
+                $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
+            }
 
             if ($isRequired === false) {
                 continue;
