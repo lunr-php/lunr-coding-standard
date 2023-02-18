@@ -54,6 +54,13 @@ class ClassCommentSniff implements Sniff
         '@mixin'          => false,
     ];
 
+    private $generics_tags = [
+        '@template'           => false,
+        '@template-covariant' => false,
+        '@extends'            => false,
+        '@implements'         => false,
+    ];
+
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -128,8 +135,9 @@ class ClassCommentSniff implements Sniff
         $classname = $tokens[$stackPtr + 2]['content'];
         $suffix    = substr($classname, -4);
 
-        $phpunit_tag_keys = array_keys($this->phpunit_tags);
-        $magic_tag_keys   = array_keys($this->magic_tags);
+        $phpunit_tag_keys  = array_keys($this->phpunit_tags);
+        $magic_tag_keys    = array_keys($this->magic_tags);
+        $generics_tag_keys = array_keys($this->generics_tags);
 
         $handled = [];
 
@@ -148,6 +156,11 @@ class ClassCommentSniff implements Sniff
                 }
             }
             elseif (in_array($name, $magic_tag_keys))
+            {
+                $handled[] = $name;
+                continue;
+            }
+            elseif (in_array($name, $generics_tag_keys))
             {
                 $handled[] = $name;
                 continue;
