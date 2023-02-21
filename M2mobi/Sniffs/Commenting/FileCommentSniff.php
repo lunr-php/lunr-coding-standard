@@ -97,10 +97,7 @@ class FileCommentSniff implements Sniff
         }
 
         // Required tags in correct order.
-        $required = array(
-                     '@package'    => true,
-                     '@author'     => true,
-                    );
+        $required = array();
 
         $foundTags = array();
         $previousName = NULL;
