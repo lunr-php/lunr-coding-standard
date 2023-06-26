@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="M2mobi">
-  <description>M2mobi Framework Coding Standard</description>
+<ruleset name="Stellr">
+  <description>Stellr Coding Standard</description>
 
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
@@ -59,13 +59,13 @@
     <severity>0</severity>
   </rule>
 
-  <rule ref="M2mobi.Commenting.FunctionComment.ScalarTypeHintMissing">
+  <rule ref="Stellr.Commenting.FunctionComment.ScalarTypeHintMissing">
       <severity>0</severity>
   </rule>
-  <rule ref="M2mobi.Commenting.FunctionComment.TypeHintMissing">
+  <rule ref="Stellr.Commenting.FunctionComment.TypeHintMissing">
       <severity>0</severity>
   </rule>
-  <rule ref="M2mobi.Commenting.FunctionComment.ParamCommentFullStop">
+  <rule ref="Stellr.Commenting.FunctionComment.ParamCommentFullStop">
       <severity>0</severity>
   </rule>
 

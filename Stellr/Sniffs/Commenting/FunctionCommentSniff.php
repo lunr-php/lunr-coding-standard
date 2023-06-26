@@ -7,7 +7,7 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace M2mobi\Sniffs\Commenting;
+namespace Stellr\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FunctionCommentSniff as SquizFunctionCommentSniff;
 use PHP_CodeSniffer\Files\File;

@@ -11,7 +11,7 @@
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
- namespace M2mobi\Sniffs\ControlStructures;
+ namespace Stellr\Sniffs\ControlStructures;
 
  use PHP_CodeSniffer\Sniffs\Sniff;
  use PHP_CodeSniffer\Files\File;

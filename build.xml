@@ -1,4 +1,4 @@
-<project name="M2mobi_Coding_Standard" default="build" basedir=".">
+<project name="Stellr_Coding_Standard" default="build" basedir=".">
 
     <property name="apidoc" value="Docs" />
 
@@ -10,8 +10,8 @@
     </target>
 
     <target name="apidoc-html"
-            description="Generate M2mobi Coding Standard Documentation (HTML)">
-        <copy file="${apidoc}/stylesheets/m2mobi-coding-standard.css" todir="build/apidoc" />
+            description="Generate Stellr Coding Standard Documentation (HTML)">
+        <copy file="${apidoc}/stylesheets/stellr-coding-standard.css" todir="build/apidoc" />
         <copy todir="build/apidoc/images">
             <fileset dir="${apidoc}/images" />
         </copy>
@@ -19,29 +19,29 @@
             <arg line=" -xinclude
                         --output build/apidoc/index.html
                         ${apidoc}/stylesheets/html.xsl
-                        ${apidoc}/m2mobi-coding-standard.xml" />
+                        ${apidoc}/stellr-coding-standard.xml" />
         </exec>
     </target>
 
     <target name="apidoc-pdf-fop"
-            description="Generate M2mobi Coding Standard Documentation (PDF)">
+            description="Generate Stellr Coding Standard Documentation (PDF)">
         <exec executable="xsltproc">
             <arg line=" -xinclude
                         --output build/apidoc/webservice-api.fo
                         ${apidoc}/stylesheets/fo-pdf.xsl
-                        ${apidoc}/m2mobi-coding-standard.xml" />
+                        ${apidoc}/stellr-coding-standard.xml" />
         </exec>
         <exec executable="fop">
-            <arg line=" -fo build/apidoc/m2mobi-coding-standard.fo
-                        -pdf build/apidoc/m2mobi-coding-standard.pdf" />
+            <arg line=" -fo build/apidoc/stellr-coding-standard.fo
+                        -pdf build/apidoc/stellr-coding-standard.pdf" />
         </exec>
     </target>
 
     <target name="apidoc-pdf-dblatex"
-            description="Generate M2mobi Coding Standard Documentation (PDF)">
+            description="Generate Stellr Coding Standard Documentation (PDF)">
         <exec executable="dblatex">
-            <arg line=" -o build/apidoc/m2mobi-coding-standard.tex.pdf
-                        ${apidoc}/m2mobi-coding-standard.xml" />
+            <arg line=" -o build/apidoc/stellr-coding-standard.tex.pdf
+                        ${apidoc}/stellr-coding-standard.xml" />
         </exec>
     </target>
 
