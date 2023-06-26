@@ -13,6 +13,7 @@
   <rule ref="Generic.NamingConventions.ConstructorName"/>
   <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
   <rule ref="Generic.PHP.BacktickOperator"/>
+  <rule ref="Generic.PHP.ClosingPHPTag"/>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
   <rule ref="Generic.PHP.ForbiddenFunctions"/>
   <rule ref="Generic.PHP.NoSilencedErrors"/>
@@ -24,6 +25,8 @@
   <rule ref="Generic.WhiteSpace.ScopeIndent"/>
   <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
 
+  <rule ref="PSR12.Files.FileHeader"/>
+  <rule ref="PSR12.Files.ImportStatement"/>
   <rule ref="PSR12.Files.OpenTag"/>
   <rule ref="PSR12.Functions.NullableTypeDeclaration"/>
   <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>

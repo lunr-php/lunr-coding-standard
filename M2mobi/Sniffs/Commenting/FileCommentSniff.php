@@ -68,8 +68,6 @@ class FileCommentSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $this->currentFile = $phpcsFile;
-
         $tokens       = $phpcsFile->getTokens();
         $commentStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
@@ -97,16 +95,15 @@ class FileCommentSniff implements Sniff
         }
 
         // Required tags in correct order.
-        $required = array(
-                     '@package'    => true,
-                     '@author'     => true,
-                    );
+        $required = array();
+        $allowed  = array();
 
         $foundTags = array();
         $previousName = NULL;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name       = $tokens[$tag]['content'];
             $isRequired = isset($required[$name]);
+            $isAllowed  = isset($allowed[$name]);
 
             if ($name === $previousName) {
                 continue;
@@ -122,6 +119,12 @@ class FileCommentSniff implements Sniff
             $previousName = $name;
 
             $foundTags[] = $name;
+
+            if (!$isAllowed) {
+                $error = '%s tag is not allowed in file comment';
+                $data  = array($tokens[$tag]['content']);
+                $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
+            }
 
             if ($isRequired === false) {
                 continue;
@@ -160,6 +163,56 @@ class FileCommentSniff implements Sniff
 
             $pos++;
         }//end foreach
+
+        // Check SPDX headers
+        $required = [
+            'SPDX-FileCopyrightText' => true,
+            'SPDX-License-Identifier' => true,
+        ];
+
+        $start        = $commentStart;
+        $foundSPDX    = [];
+        $SPDX         = [];
+        $previousName = NULL;
+
+        while ($line = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $start, $commentEnd)) {
+            if (substr($tokens[$line]['content'], 0, 4) === 'SPDX')
+            {
+                $name = substr($tokens[$line]['content'], 0, strpos($tokens[$line]['content'], ':'));
+
+                if ($name !== $previousName) {
+                    $foundSPDX[]  = $name;
+                    $SPDX[]       = $line;
+                    $previousName = $name;
+                }
+            }
+
+            $start = $line + 1;
+        }
+
+        $pos = 0;
+        foreach ($required as $header => $true) {
+            if (in_array($header, $foundSPDX) === false) {
+                $error = 'Missing %s header in file comment';
+                $data  = array($header);
+                $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($header, 1)).'Header', $data);
+            }
+
+            if (isset($foundSPDX[$pos]) === false) {
+                continue;
+            }
+
+            if ($foundSPDX[$pos] !== $header) {
+                $error = 'The header in position %s should be the %s header';
+                $data  = array(
+                          ($pos + 1),
+                          $header,
+                         );
+                $phpcsFile->addError($error, $SPDX[$pos], ucfirst(substr($header, 1)).'HeaderOrder', $data);
+            }
+
+            $pos++;
+        }
 
         // Ignore the rest of the file.
         return ($phpcsFile->numTokens + 1);

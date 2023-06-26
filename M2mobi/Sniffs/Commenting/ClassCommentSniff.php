@@ -40,6 +40,26 @@
 class ClassCommentSniff implements Sniff
 {
 
+    private $phpunit_tags = [
+        '@depends'       => false,
+        '@covers'        => true,
+        '@backupGlobals' => false,
+    ];
+
+    private $magic_tags = [
+        '@property'       => false,
+        '@property-read'  => false,
+        '@property-write' => false,
+        '@method'         => false,
+        '@mixin'          => false,
+    ];
+
+    private $generics_tags = [
+        '@template'           => false,
+        '@template-covariant' => false,
+        '@extends'            => false,
+        '@implements'         => false,
+    ];
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -115,20 +135,16 @@ class ClassCommentSniff implements Sniff
         $classname = $tokens[$stackPtr + 2]['content'];
         $suffix    = substr($classname, -4);
 
-        $phpunit_tags = [
-            '@depends' => false,
-            '@covers' => true,
-            '@backupGlobals' => false,
-        ];
-
-        $tag_keys = array_keys($phpunit_tags);
+        $phpunit_tag_keys  = array_keys($this->phpunit_tags);
+        $magic_tag_keys    = array_keys($this->magic_tags);
+        $generics_tag_keys = array_keys($this->generics_tags);
 
         $handled = [];
 
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name = $tokens[$tag]['content'];
 
-            if (in_array($name, $tag_keys)) {
+            if (in_array($name, $phpunit_tag_keys)) {
                 if ($suffix === 'Test') {
                     $handled[] = $name;
                     continue;
@@ -138,6 +154,16 @@ class ClassCommentSniff implements Sniff
                     $phpcsFile->addError($error, $tag, 'TagNotAllowed', $data);
                     continue;
                 }
+            }
+            elseif (in_array($name, $magic_tag_keys))
+            {
+                $handled[] = $name;
+                continue;
+            }
+            elseif (in_array($name, $generics_tag_keys))
+            {
+                $handled[] = $name;
+                continue;
             }
 
             $error = '%s tag is not allowed in class comment';
@@ -149,7 +175,7 @@ class ClassCommentSniff implements Sniff
             return;
         }
 
-        foreach ($phpunit_tags as $tag => $required) {
+        foreach ($this->phpunit_tags as $tag => $required) {
             if ($required && !in_array($tag, $handled)) {
                 if ($tokens[$phpcsFile->findPrevious(T_NAMESPACE, $stackPtr) + 4]['content'] != 'Halo' || $tag != '@covers') {
                     $error = 'Missing %s tag in test class comment';

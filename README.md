@@ -18,6 +18,19 @@
 ## General
 - PHP language constructs must be followed by a single whitespace.
 
+## Files
+- The header section in every file is categorized in blocks. Each
+  block needs to be grouped together and separated by an empty line
+  from the next block.
+- Blocks in the header section need to be in this order:
+    - Opening PHP tag
+    - File-level docblock
+    - Declare statements
+    - Namespace declaration
+    - Class-based use imports
+    - Function-based use imports
+    - Constant-based use imports
+
 ## Types
 - There must not be a space before the colon of a function return type declaration.
 - There must be one space after the colon of a function return type declaration.
@@ -69,10 +82,9 @@ $config = [
 
 ## Classes
 - Classes must have their opening bracket on a new line and not have it indented.
-- There must be one blank line after the namespace declaration.
 - There must be a single space after the scope keyword.
 - All class keywords must be lowercase.
-- Use declarations should be according to PRS-2  [psr-2/#3-namespace-and-use-declarations](https://www.php-fig.org/psr/psr-2/#3-namespace-and-use-declarations)
+- Use declarations should be according to PSR-2  [psr-2/#3-namespace-and-use-declarations](https://www.php-fig.org/psr/psr-2/#3-namespace-and-use-declarations)
 - There must be only one class declaration per file
 
 ## Strings
@@ -118,3 +130,4 @@ $config = [
 
 ## Control structures
 - Use of [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions) is not allowed
+- Guard clauses should be used where possible to return from functions early
