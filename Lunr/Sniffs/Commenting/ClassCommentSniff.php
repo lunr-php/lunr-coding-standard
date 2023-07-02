@@ -175,9 +175,15 @@ class ClassCommentSniff implements Sniff
             return;
         }
 
+        $namespace_position     = $phpcsFile->findPrevious(T_NAMESPACE, $stackPtr);
+        $end_namespace_position = $phpcsFile->findNext(T_SEMICOLON, $namespace_position);
+
+        $is_halo_class             = $tokens[$namespace_position + 4]['content'] == 'Halo';
+        $is_unit_test_helper_class = $tokens[$end_namespace_position - 1]['content'] == 'Helpers';
+
         foreach ($this->phpunit_tags as $tag => $required) {
             if ($required && !in_array($tag, $handled)) {
-                if ($tokens[$phpcsFile->findPrevious(T_NAMESPACE, $stackPtr) + 4]['content'] != 'Halo' || $tag != '@covers') {
+                if ((!$is_halo_class && !$is_unit_test_helper_class) || $tag != '@covers') {
                     $error = 'Missing %s tag in test class comment';
                     $data  = array($tag);
                     $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($tag, 1)).'Tag', $data);
