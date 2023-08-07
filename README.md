@@ -65,7 +65,7 @@ $config = [
 ## Functions
 - In the argument list, there must not be a space before each comma, and there must be one space after each comma.
 - Function declarations must follow the "BSD/Allman style". The function brace is on the line following the function declaration and is indented to the same column as the start of the function declaration.
-- Functions should always have a scope declaration (public, protected, private)
+- Functions must always have visibility defined (public, protected, private); abstract and final MUST be declared before the visibility; static MUST be declared after the visibility
 - There must be an empty line before and after each function in a class.
 - There must be a single space after the scope keyword.
 - The closing bracket must be directly after the body.
