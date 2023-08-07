@@ -70,6 +70,9 @@ $config = [
 - There must be a single space after the scope keyword.
 - The closing bracket must be directly after the body.
 - All function keywords must be lowercase.
+- Closures must have one space between the `function` keyword and the opening bracket, one space before and after the `use` keyword and one space before the curly bracket of the body
+- If the closure body is empty, there must be no space between the curly brackets. If it is not empty there must be one space after the opening and before the closing curly bracket
+- Arrow functions must have no space between the `fn` keyword and the opening bracket, and a space before and after the `=>`
 
 ## Control structures
 - Make sure there are no spaces directly after the opening bracket or before the closing bracket.
