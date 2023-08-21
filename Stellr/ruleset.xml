@@ -69,6 +69,7 @@
       <severity>0</severity>
   </rule>
 
+  <rule ref="PSR2.Methods.MethodDeclaration"/>
   <rule ref="PSR2.Methods.FunctionClosingBrace"/>
   <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
   <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">

@@ -96,7 +96,9 @@ class FileCommentSniff implements Sniff
 
         // Required tags in correct order.
         $required = array();
-        $allowed  = array();
+        $allowed  = array(
+            '@see' => true,
+        );
 
         $foundTags = array();
         $previousName = NULL;
