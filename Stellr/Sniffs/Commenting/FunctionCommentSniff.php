@@ -133,7 +133,7 @@ class FunctionCommentSniff extends SquizFunctionCommentSniff
 
                 // If the return type is void, make sure there is
                 // no return statement in the function.
-                if ($returnType === 'void') {
+                if (in_array($returnType, [ 'void', 'never' ], true)) {
                     if (isset($tokens[$stackPtr]['scope_closer']) === true) {
                         $endToken = $tokens[$stackPtr]['scope_closer'];
                         for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
