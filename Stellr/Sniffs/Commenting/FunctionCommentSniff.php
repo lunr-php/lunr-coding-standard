@@ -417,14 +417,6 @@ class FunctionCommentSniff extends SquizFunctionCommentSniff
                         }
 
                         $phpcsFile->addError($error, $stackPtr, $errorCode, $data);
-                    } else if ($typeHint !== $compareTypeHint && $typeHint !== '?'.$compareTypeHint) {
-                        $error = 'Expected type hint "%s"; found "%s" for %s';
-                        $data  = [
-                            $suggestedTypeHint,
-                            $typeHint,
-                            $param['var'],
-                        ];
-                        $phpcsFile->addError($error, $stackPtr, 'IncorrectTypeHint', $data);
                     }//end if
                 } else if ($suggestedTypeHint === '' && isset($realParams[$pos]) === true) {
                     $typeHint = $realParams[$pos]['type_hint'];
