@@ -61,6 +61,11 @@ class ClassCommentSniff implements Sniff
         '@implements'         => false,
     ];
 
+    private $phpstan_tags = [
+        '@phpstan-type'        => false,
+        '@phpstan-import-type' => false,
+    ];
+
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -138,6 +143,7 @@ class ClassCommentSniff implements Sniff
         $phpunit_tag_keys  = array_keys($this->phpunit_tags);
         $magic_tag_keys    = array_keys($this->magic_tags);
         $generics_tag_keys = array_keys($this->generics_tags);
+        $phpstan_tag_keys  = array_keys($this->phpstan_tags);
 
         $handled = [];
 
@@ -161,6 +167,11 @@ class ClassCommentSniff implements Sniff
                 continue;
             }
             elseif (in_array($name, $generics_tag_keys))
+            {
+                $handled[] = $name;
+                continue;
+            }
+            elseif (in_array($name, $phpstan_tag_keys))
             {
                 $handled[] = $name;
                 continue;
