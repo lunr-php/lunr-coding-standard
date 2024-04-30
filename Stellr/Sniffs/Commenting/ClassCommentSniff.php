@@ -59,6 +59,7 @@ class ClassCommentSniff implements Sniff
         '@template-covariant' => false,
         '@extends'            => false,
         '@implements'         => false,
+        '@deprecated'         => false,
     ];
 
     private $phpstan_tags = [
