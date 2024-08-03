@@ -87,8 +87,13 @@ $config = [
 - Classes must have their opening bracket on a new line and not have it indented.
 - There must be a single space after the scope keyword.
 - All class keywords must be lowercase.
-- Use declarations should be according to PSR-2  [psr-2/#3-namespace-and-use-declarations](https://www.php-fig.org/psr/psr-2/#3-namespace-and-use-declarations)
 - There must be only one class declaration per file
+
+## Use declarations
+- Use declarations should be according to PSR-2  [psr-2/#3-namespace-and-use-declarations](https://www.php-fig.org/psr/psr-2/#3-namespace-and-use-declarations)
+- Use imports should be sorted alphabetically
+- All classes from other namespaces should be referenced through use statements
+- Classes from the same namespace should not be referenced through use statements
 
 ## Strings
 - Always have one space preceding and succeeding the concatenation symbol.
