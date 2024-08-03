@@ -1,0 +1,17 @@
+{
+    "name": "lunr/coding-standard",
+    "description": "Lunr Coding Standard for PHP_CodeSniffer",
+    "license": "MIT",
+    "type": "phpcodesniffer-standard",
+    "keywords": [ "phpcs", "dev" ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lunr\\Sniffs\\": "Lunr/Sniffs/"
+        }
+    }
+}
