@@ -139,3 +139,6 @@ $config = [
 ## Control structures
 - Use of [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions) is not allowed
 - Guard clauses should be used where possible to return from functions early
+
+## Tests
+- Test classes should be ordered the same way the system under test is: tests for the first failure first, ending in the succesful cases.
