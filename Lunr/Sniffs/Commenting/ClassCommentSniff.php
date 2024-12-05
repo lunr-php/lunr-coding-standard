@@ -138,8 +138,8 @@ class ClassCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentStart, 'SpacingBefore');
         }
 
-        $classname = $tokens[$stackPtr + 2]['content'];
-        $suffix    = substr($classname, -4);
+        $classname  = $tokens[$stackPtr + 2]['content'];
+        $is_test    = str_ends_with($classname, 'Test') || str_ends_with($classname, 'TestCase');
 
         $phpunit_tag_keys  = array_keys($this->phpunit_tags);
         $magic_tag_keys    = array_keys($this->magic_tags);
@@ -152,7 +152,7 @@ class ClassCommentSniff implements Sniff
             $name = $tokens[$tag]['content'];
 
             if (in_array($name, $phpunit_tag_keys)) {
-                if ($suffix === 'Test') {
+                if ($is_test === TRUE) {
                     $handled[] = $name;
                     continue;
                 } else {
@@ -183,7 +183,7 @@ class ClassCommentSniff implements Sniff
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
 
-        if ($suffix !== 'Test') {
+        if ($is_test === FALSE) {
             return;
         }
 
