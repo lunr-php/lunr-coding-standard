@@ -155,4 +155,6 @@
     </properties>
   </rule>
   <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
+
+  <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
 </ruleset>
