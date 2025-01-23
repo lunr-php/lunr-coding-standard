@@ -54,8 +54,9 @@ $config = [
 
 ## Naming
 - All constants names should be in all uppercase
-- Use snake case naming for functions and variables, unless otherwise dictated by libraries or other external influences.
-- Class naming should be in Pascal case.
+- Use camelCaps naming for variables
+- Use camelCaps naming for function and method names. snake_case is allowed for legacy compatibility
+- Class naming should be in PascalCase.
 
 ## Comments
 - All files should have a file comment
