@@ -1,7 +1,7 @@
 {
     "phpdoc-parser": {
         "url": "https://github.com/phpstan/phpdoc-parser.git",
-        "version": "1.29.1",
+        "version": "2.3.0",
         "psr4": {
             "prefix": "PHPStan\\PhpDocParser",
             "search-path": "/src/"
