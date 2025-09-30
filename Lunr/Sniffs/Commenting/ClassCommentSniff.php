@@ -74,7 +74,7 @@ class ClassCommentSniff implements Sniff
      */
     public function register()
     {
-        return array(T_CLASS);
+        return [T_CLASS];
 
     }//end register()
 
@@ -91,8 +91,12 @@ class ClassCommentSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $find   = Tokens::$methodPrefixes;
-        $find[] = T_WHITESPACE;
+        $find   = [
+            T_ABSTRACT   => T_ABSTRACT,
+            T_FINAL      => T_FINAL,
+            T_READONLY   => T_READONLY,
+            T_WHITESPACE => T_WHITESPACE,
+        ];
 
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
@@ -139,6 +143,7 @@ class ClassCommentSniff implements Sniff
         }
 
         $classname  = $tokens[$stackPtr + 2]['content'];
+
         $is_test    = str_ends_with($classname, 'Test') || str_ends_with($classname, 'TestCase');
 
         $phpunit_tag_keys  = array_keys($this->phpunit_tags);
@@ -188,10 +193,9 @@ class ClassCommentSniff implements Sniff
         }
 
         $namespace_position     = $phpcsFile->findPrevious(T_NAMESPACE, $stackPtr);
-        $end_namespace_position = $phpcsFile->findNext(T_SEMICOLON, $namespace_position);
 
-        $is_halo_class             = $tokens[$namespace_position + 4]['content'] == 'Halo';
-        $is_unit_test_helper_class = $tokens[$end_namespace_position - 1]['content'] == 'Helpers';
+        $is_halo_class             = str_contains($tokens[$namespace_position + 2]['content'], '\Halo\\') || str_ends_with($tokens[$namespace_position + 2]['content'], '\Halo');
+        $is_unit_test_helper_class = str_ends_with($tokens[$namespace_position + 2]['content'], '\Helpers');
 
         foreach ($this->phpunit_tags as $tag => $required) {
             if ($required && !in_array($tag, $handled)) {
