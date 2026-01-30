@@ -6,9 +6,18 @@
     "keywords": [ "phpcs", "dev" ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "optimize-autoloader": true
+    },
     "require": {
         "php": "^8.1",
-        "phpstan/phpdoc-parser": "^2.3.0"
+        "ext-tokenizer": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "~v1.2",
+        "phpstan/phpdoc-parser": "^2.3.0",
+        "squizlabs/php_codesniffer": "~4.0"
     },
     "autoload": {
         "psr-4": {
