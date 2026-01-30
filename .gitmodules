@@ -1,3 +1,0 @@
-[submodule "third-party/slevomat"]
-	path = third-party/slevomat
-	url = git@github.com:slevomat/coding-standard.git
