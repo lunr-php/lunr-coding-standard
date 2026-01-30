@@ -16,6 +16,7 @@
         "php": "^8.3",
         "ext-tokenizer": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "~v1.2",
+        "shipmonk/composer-dependency-analyser": "~1.8",
         "slevomat/coding-standard": "8.27.1",
         "squizlabs/php_codesniffer": "~4.0"
     },
