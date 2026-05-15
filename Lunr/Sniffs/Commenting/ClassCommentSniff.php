@@ -98,7 +98,31 @@ class ClassCommentSniff implements Sniff
             T_WHITESPACE => T_WHITESPACE,
         ];
 
-        $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
+        $hasCoversAttribute = false;
+
+        for ($commentEnd = ($stackPtr - 1); $commentEnd >= 0; $commentEnd--) {
+            if (isset($find[$tokens[$commentEnd]['code']]) === true) {
+                continue;
+            }
+
+            if ($tokens[$commentEnd]['code'] === T_ATTRIBUTE_END
+                && isset($tokens[$commentEnd]['attribute_opener']) === true
+            ) {
+                $attrOpener = $tokens[$commentEnd]['attribute_opener'];
+                for ($i = $attrOpener + 1; $i < $commentEnd; $i++) {
+                    if ($tokens[$i]['code'] === T_STRING && $tokens[$i]['content'] === 'CoversClass') {
+                        $hasCoversAttribute = true;
+                        break;
+                    }
+                }
+
+                $commentEnd = $attrOpener;
+                continue;
+            }
+
+            break;
+        }
+
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
             && $tokens[$commentEnd]['code'] !== T_COMMENT
         ) {
@@ -131,7 +155,12 @@ class ClassCommentSniff implements Sniff
             return;
         }
 
-        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
+        // Find the first non-whitespace token after the doc comment to check spacing.
+        // This may be an attribute or the class keyword itself.
+        $nextAfterComment = $phpcsFile->findNext(T_WHITESPACE, ($commentEnd + 1), null, true);
+        if ($nextAfterComment !== false
+            && $tokens[$commentEnd]['line'] !== ($tokens[$nextAfterComment]['line'] - 1)
+        ) {
             $error = 'There must be no blank lines after the class comment';
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
         }
@@ -196,6 +225,10 @@ class ClassCommentSniff implements Sniff
 
         $is_halo_class             = str_contains($tokens[$namespace_position + 2]['content'], '\Halo\\') || str_ends_with($tokens[$namespace_position + 2]['content'], '\Halo');
         $is_unit_test_helper_class = str_ends_with($tokens[$namespace_position + 2]['content'], '\Helpers');
+
+        if ($hasCoversAttribute) {
+            $handled[] = '@covers';
+        }
 
         foreach ($this->phpunit_tags as $tag => $required) {
             if ($required && !in_array($tag, $handled)) {
